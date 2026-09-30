@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-tactical: 'Rajdhani', sans-serif;
+    --font-heading: 'Chakra Petch', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: #050811;
+    color: #e2e8f0;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  #root {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Custom tactical scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.4);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.8);
+}
+
+/* Tactical HUD Utilities */
+.font-tactical {
+  font-family: 'Rajdhani', sans-serif;
+}
+.font-heading {
+  font-family: 'Chakra Petch', sans-serif;
+}
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.radar-sweep {
+  animation: radarSweep 4s linear infinite;
+}
+
+@keyframes radarSweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.glow-red {
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.45);
+}
+.glow-blue {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.45);
+}
+.glow-green {
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.45);
+}
+.glow-yellow {
+  box-shadow: 0 0 15px rgba(234, 179, 8, 0.45);
+}
+
+.hud-panel {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(10, 15, 30, 0.95) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+.hud-panel-danger {
+  background: linear-gradient(135deg, rgba(30, 10, 15, 0.85) 0%, rgba(20, 5, 10, 0.95) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.scanline {
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 50%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.3)
+  );
+  background-size: 100% 4px;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2s infinite ease-in-out;
+}

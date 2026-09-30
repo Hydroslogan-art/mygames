@@ -1,0 +1,382 @@
+// Game Constants & Definitions for Frontline Sandbox
+
+export const TEAMS = {
+  red: {
+    id: 'red',
+    name: 'Crimson Legion',
+    shortName: 'RED',
+    color: '#ef4444',
+    bgBadge: 'bg-red-500/20 text-red-400 border-red-500/40',
+    borderCol: 'border-red-500',
+    hex: '#ef4444',
+    darkHex: '#991b1b',
+    glowHex: 'rgba(239, 68, 68, 0.4)',
+    accent: '#f87171',
+    description: 'Specializes in explosive artillery and high-aggression shock infantry.'
+  },
+  blue: {
+    id: 'blue',
+    name: 'Cobalt Vanguard',
+    shortName: 'BLUE',
+    color: '#3b82f6',
+    bgBadge: 'bg-blue-500/20 text-blue-400 border-blue-500/40',
+    borderCol: 'border-blue-500',
+    hex: '#3b82f6',
+    darkHex: '#1e40af',
+    glowHex: 'rgba(59, 130, 246, 0.4)',
+    accent: '#60a5fa',
+    description: 'Disciplined defenders with fortified armor plating and defensive tactics.'
+  },
+  green: {
+    id: 'green',
+    name: 'Verdant Corps',
+    shortName: 'GREEN',
+    color: '#22c55e',
+    bgBadge: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40',
+    borderCol: 'border-emerald-500',
+    hex: '#22c55e',
+    darkHex: '#166534',
+    glowHex: 'rgba(34, 197, 94, 0.4)',
+    accent: '#4ade80',
+    description: 'Guerrilla combatants utilizing rapid movement and high-accuracy snipers.'
+  },
+  yellow: {
+    id: 'yellow',
+    name: 'Solar Syndicate',
+    shortName: 'YELLOW',
+    color: '#eab308',
+    bgBadge: 'bg-amber-500/20 text-amber-400 border-amber-500/40',
+    borderCol: 'border-amber-500',
+    hex: '#eab308',
+    darkHex: '#854d0e',
+    glowHex: 'rgba(234, 179, 8, 0.4)',
+    accent: '#facc15',
+    description: 'Wealthy corporate syndicate wielding rapid-fire tech and heavy mechanized armor.'
+  }
+};
+
+export const UNIT_TIERS = {
+  TIER_1: { id: 1, name: 'Tier 1: Infantry', label: 'Infantry Squad' },
+  TIER_2: { id: 2, name: 'Tier 2: Specialists', label: 'Specialists' },
+  TIER_3: { id: 3, name: 'Tier 3: Vehicles & Cmd', label: 'Heavy & Command' }
+};
+
+export const UNIT_TYPES = {
+  // Tier 1: Light Infantry
+  rifleman: {
+    id: 'rifleman',
+    name: 'Rifleman',
+    tier: 1,
+    tierName: 'Tier 1: Infantry',
+    cost: 50,
+    hp: 120,
+    speed: 1.6,
+    damage: 16,
+    range: 130,
+    fireRate: 0.65, // shots per sec
+    accuracy: 0.85,
+    radius: 7,
+    armor: 0,
+    isVehicle: false,
+    role: 'Balanced line infantry with assault rifle. Captures points quickly.',
+    iconName: 'UserCheck',
+    burstCount: 1,
+    sound: 'playRifle'
+  },
+  assault: {
+    id: 'assault',
+    name: 'SMG Infiltrator',
+    tier: 1,
+    tierName: 'Tier 1: Infantry',
+    cost: 75,
+    hp: 105,
+    speed: 2.1,
+    damage: 10,
+    range: 90,
+    fireRate: 1.8,
+    accuracy: 0.72,
+    radius: 6,
+    armor: 0,
+    isVehicle: false,
+    role: 'High-speed flanking unit with submachine gun spray. Lethal in close quarters.',
+    iconName: 'Zap',
+    burstCount: 3,
+    sound: 'playRifle'
+  },
+
+  // Tier 2: Specialists
+  sniper: {
+    id: 'sniper',
+    name: 'Ghost Sniper',
+    tier: 2,
+    tierName: 'Tier 2: Specialists',
+    cost: 130,
+    hp: 85,
+    speed: 1.3,
+    damage: 90,
+    range: 250,
+    fireRate: 0.28,
+    accuracy: 0.96,
+    radius: 6,
+    armor: 0,
+    isVehicle: false,
+    role: 'Long-range marksman. Delivers devastating single-target critical shots from afar.',
+    iconName: 'Crosshair',
+    burstCount: 1,
+    sound: 'playSniper'
+  },
+  hmg: {
+    id: 'hmg',
+    name: 'Heavy Gunner (HMG)',
+    tier: 2,
+    tierName: 'Tier 2: Specialists',
+    cost: 150,
+    hp: 150,
+    speed: 1.1,
+    damage: 14,
+    range: 160,
+    fireRate: 2.5,
+    accuracy: 0.65,
+    radius: 8,
+    armor: 5,
+    isVehicle: false,
+    suppression: 0.4, // slows enemy target speed & fire rate
+    role: 'Suppressive fire specialist. Slows down enemy infantry and shreds light units.',
+    iconName: 'ShieldAlert',
+    burstCount: 4,
+    sound: 'playHMG'
+  },
+  bazooka: {
+    id: 'bazooka',
+    name: 'Rocket Specialist',
+    tier: 2,
+    tierName: 'Tier 2: Specialists',
+    cost: 160,
+    hp: 130,
+    speed: 1.25,
+    damage: 65,
+    splashRadius: 36,
+    range: 170,
+    fireRate: 0.35,
+    accuracy: 0.88,
+    radius: 7,
+    armor: 0,
+    isVehicle: false,
+    antiArmorMult: 2.5, // 2.5x vs vehicles & bases!
+    role: 'Anti-armor soldier armed with HEAT rockets. Obliterates tanks and bases.',
+    iconName: 'Target',
+    burstCount: 1,
+    sound: 'playRocketLaunch'
+  },
+  medic: {
+    id: 'medic',
+    name: 'Combat Medic',
+    tier: 2,
+    tierName: 'Tier 2: Specialists',
+    cost: 120,
+    hp: 110,
+    speed: 1.5,
+    damage: 8,
+    range: 100,
+    fireRate: 0.5,
+    healAmount: 20,
+    healRange: 120,
+    radius: 6,
+    armor: 0,
+    isVehicle: false,
+    isHealer: true,
+    role: 'Provides battlefield triage, continuously healing wounded allies in proximity.',
+    iconName: 'HeartPulse',
+    burstCount: 1,
+    sound: 'playHeal'
+  },
+
+  // Tier 3: Vehicles & Commanders
+  armoredCar: {
+    id: 'armoredCar',
+    name: 'Recon Armored Scout',
+    tier: 3,
+    tierName: 'Tier 3: Vehicles & Cmd',
+    cost: 260,
+    hp: 360,
+    speed: 1.9,
+    damage: 22,
+    range: 145,
+    fireRate: 1.4,
+    accuracy: 0.8,
+    radius: 12,
+    armor: 18,
+    isVehicle: true,
+    role: 'Fast wheeled vehicle. High bullet resistance, crushes light infantry under wheels.',
+    iconName: 'Truck',
+    burstCount: 2,
+    sound: 'playHMG'
+  },
+  tank: {
+    id: 'tank',
+    name: 'Main Battle Tank',
+    tier: 3,
+    tierName: 'Tier 3: Vehicles & Cmd',
+    cost: 450,
+    hp: 680,
+    speed: 1.1,
+    damage: 130,
+    splashRadius: 45,
+    range: 190,
+    fireRate: 0.32,
+    accuracy: 0.9,
+    radius: 17,
+    armor: 35,
+    isVehicle: true,
+    antiArmorMult: 1.6,
+    role: 'Heavily armored titan with 88mm high-explosive cannon. Crushes defenses.',
+    iconName: 'Shield',
+    burstCount: 1,
+    sound: 'playTankCannon'
+  },
+  commander: {
+    id: 'commander',
+    name: 'Field Commander',
+    tier: 3,
+    tierName: 'Tier 3: Vehicles & Cmd',
+    cost: 320,
+    hp: 280,
+    speed: 1.4,
+    damage: 35,
+    range: 140,
+    fireRate: 0.9,
+    accuracy: 0.92,
+    radius: 9,
+    armor: 12,
+    isVehicle: false,
+    isCommander: true,
+    auraRadius: 160,
+    auraBuffDamage: 0.25,
+    auraBuffArmor: 8,
+    role: 'Elite battlefield officer. Inspires nearby allies with +25% damage & armor aura.',
+    iconName: 'Award',
+    burstCount: 1,
+    sound: 'playRifle'
+  }
+};
+
+export const COMMANDER_POWERS = [
+  {
+    id: 'airstrike',
+    name: 'Airstrike Barrage',
+    cost: 150,
+    cooldown: 18,
+    radius: 80,
+    color: '#f97316',
+    icon: 'Bomb',
+    description: 'Calls in precision bombers to carpet bomb an area with explosive ordinance.',
+    damage: 220,
+    craterCount: 5,
+    delay: 1.2
+  },
+  {
+    id: 'emp',
+    name: 'Tactical EMP Strike',
+    cost: 120,
+    cooldown: 22,
+    radius: 110,
+    color: '#06b6d4',
+    icon: 'Zap',
+    description: 'Disables all enemy electronics and weapons in a wide radius for 6 seconds.',
+    duration: 6.0,
+    delay: 0.5
+  },
+  {
+    id: 'paratroopers',
+    name: 'Paratrooper Squad',
+    cost: 200,
+    cooldown: 25,
+    radius: 50,
+    color: '#10b981',
+    icon: 'Navigation',
+    description: 'Air-drops a veteran squad of 3 Riflemen and 1 Bazooka at the designated point.',
+    delay: 1.0
+  },
+  {
+    id: 'fieldHeal',
+    name: 'Nano-Repair & Stim',
+    cost: 140,
+    cooldown: 20,
+    radius: 130,
+    color: '#ec4899',
+    icon: 'Activity',
+    description: 'Restores 100% HP to all friendly units in radius and grants 50% fire rate boost.',
+    duration: 8.0,
+    delay: 0.2
+  },
+  {
+    id: 'orbitalLaser',
+    name: 'Orbital Particle Cannon',
+    cost: 350,
+    cooldown: 40,
+    radius: 100,
+    color: '#a855f7',
+    icon: 'Flame',
+    description: 'Ultimate weapon: A searing orbital particle laser obliterates all units in its path.',
+    damage: 550,
+    delay: 1.5
+  }
+];
+
+export const UPGRADES = [
+  {
+    id: 'weapons',
+    name: 'Tungsten-Core Munitions',
+    icon: 'Swords',
+    maxLevel: 3,
+    baseCost: 150,
+    costMultiplier: 1.8,
+    description: 'Upgrades squad small arms & heavy ordnance damage by +18% per level.',
+    bonusPerLevel: 0.18,
+    statLabel: '+18% Unit Damage'
+  },
+  {
+    id: 'armor',
+    name: 'Reinforced Ballistic Plating',
+    icon: 'Shield',
+    maxLevel: 3,
+    baseCost: 140,
+    costMultiplier: 1.7,
+    description: 'Adds +25% max health and +5 flat armor to all fielded units.',
+    bonusPerLevel: 0.25,
+    statLabel: '+25% Max HP & Armor'
+  },
+  {
+    id: 'logistics',
+    name: 'Automated Resource Drills',
+    icon: 'TrendingUp',
+    maxLevel: 3,
+    baseCost: 120,
+    costMultiplier: 1.6,
+    description: 'Increases team automatic resource generation and generator yields by +35%.',
+    bonusPerLevel: 0.35,
+    statLabel: '+35% Income Rate'
+  },
+  {
+    id: 'nexusDefense',
+    name: 'Nexus Perimeter Auto-Turrets',
+    icon: 'Radio',
+    maxLevel: 3,
+    baseCost: 200,
+    costMultiplier: 1.8,
+    description: 'Adds twin automated defense turrets and +400 max HP to your team Nexus base.',
+    bonusPerLevel: 400,
+    statLabel: '+400 Nexus HP & Turrets'
+  },
+  {
+    id: 'mobility',
+    name: 'Combat Adrenaline Stims',
+    icon: 'FastForward',
+    maxLevel: 3,
+    baseCost: 110,
+    costMultiplier: 1.6,
+    description: 'Increases unit movement speed by +20% and reduces suppression effects.',
+    bonusPerLevel: 0.20,
+    statLabel: '+20% Move Speed'
+  }
+];
